@@ -1,3 +1,10 @@
+import { featuresIndex } from '../../data/featuresIndex'
+
+import FeatureCard from '../../components/FeatureCard'
+import styled from 'styled-components'
+import { device } from '../../utils/style/breakpoints'
+import Footer from '../../components/Footer'
+
 export default function Index() {
 	return (
 		/* Title "Argent Bank - Home Page"*/
@@ -5,11 +12,11 @@ export default function Index() {
 		<div>
 			{/* Header */}
 			{/* Main nav */}
-			<nav class='main-nav'>
+			<nav className='main-nav'>
 				{/* Logo retour page Index */}
 				<a class='main-nav-logo' href='./index.html'>
 					<img
-						class='main-nav-logo-image'
+						className='main-nav-logo-image'
 						src='./img/argentBankLogo.png'
 						alt='Argent Bank Logo'
 					/>
@@ -51,72 +58,31 @@ export default function Index() {
 					</section>
 				</div>
 
-				{/* "white lies" Part */}
-				<section class='features'>
+				<Features>
 					<h2 class='sr-only'>Features</h2>
 
-					{/* Feature Card */}
-					{/* img > h3 > p */}
-					<div class='feature-item'>
-						<img
-							src='./img/icon-chat.png'
-							alt='Chat Icon'
-							class='feature-icon'
-						/>
-						<h3 class='feature-item-title'>
-							You are our #1 priority
-						</h3>
-						<p>
-							Need to talk to a
-							representative? You can get in
-							touch through our 24/7 chat or
-							through a phone call in less
-							than 5 minutes.
-						</p>
-					</div>
-
-					{/* Feature Card */}
-					<div class='feature-item'>
-						<img
-							src='../assets/icon-money.png'
-							alt='Chat Icon'
-							class='feature-icon'
-						/>
-						<h3 class='feature-item-title'>
-							More savings means higher rates
-						</h3>
-						<p>
-							The more you save with us, the
-							higher your interest rate will
-							be!
-						</p>
-					</div>
-
-					{/* Feature Card */}
-					<div class='feature-item'>
-						<img
-							src='./img/icon-security.png'
-							alt='Chat Icon'
-							class='feature-icon'
-						/>
-						<h3 class='feature-item-title'>
-							Security you can trust
-						</h3>
-						<p>
-							We use top of the line
-							encryption to make sure your
-							data and money is always safe.
-						</p>
-					</div>
-				</section>
+					{featuresIndex.map(
+						({ img, title, content }) => (
+							<FeatureCard
+								img={img}
+								title={title}
+								content={content}
+							/>
+						)
+					)}
+				</Features>
 			</main>
 
-			{/* Footer not dynamic */}
-			<footer class='footer'>
-				<p class='footer-text'>
-					Copyright 2023 Argent Bank
-				</p>
-			</footer>
+			<Footer />
 		</div>
 	)
 }
+
+const Features = styled.section`
+	display: flex;
+	flex-direction: column;
+
+	@media (${device.laptop}) {
+		flex-direction: row;
+	}
+`

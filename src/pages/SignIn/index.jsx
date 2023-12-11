@@ -1,3 +1,5 @@
+import Footer from '../../components/Footer'
+
 export default function SignIn() {
 	return (
 		/* Title "Argent Bank - Home Page"*/
@@ -83,12 +85,7 @@ export default function SignIn() {
 				</section>
 			</main>
 
-			{/* Footer not dynamic */}
-			<footer class='footer'>
-				<p class='footer-text'>
-					Copyright 2023 Argent Bank
-				</p>
-			</footer>
+			<Footer />
 		</div>
 	)
 }
