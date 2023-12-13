@@ -1,12 +1,9 @@
-import { Link, NavLink } from 'react-router-dom'
-
 import { accountUser } from '../../data/accountUser'
 
 import Footer from '../../components/Footer'
 import Navigation from '../../components/Navigation'
 import AccountCard from '../../components/AccountCard'
 
-import styled from 'styled-components'
 import { StyledNavLink } from '../../components/Navigation'
 
 export default function User() {
@@ -16,12 +13,12 @@ export default function User() {
 		<div>
 			<Navigation>
 				<StyledNavLink to={'/profil'}>
-					<i class='fa fa-user-circle'></i>
+					<i className='fa fa-user-circle'></i>
 					Tony
 				</StyledNavLink>
 
-				<StyledNavLink to={'/'} activeClassName='any'>
-					<i class='fa fa-sign-out'></i>
+				<StyledNavLink to={'/'}>
+					<i className='fa fa-sign-out'></i>
 					Sign Out
 				</StyledNavLink>
 			</Navigation>
@@ -47,11 +44,12 @@ export default function User() {
 				<h2 className='sr-only'>Accounts</h2>
 
 				{accountUser.map(
-					({ title, amount, description }) => (
+					({ title, amount, description }, index) => (
 						<AccountCard
 							title={title}
 							amount={amount}
 							description={description}
+							key={index}
 						/>
 					)
 				)}

@@ -13,7 +13,7 @@ body {
   min-height: 100vh;
 }
 
-.main {
+main {
   flex: 1;
 }
 
@@ -35,6 +35,7 @@ body {
   white-space: nowrap !important; /* 3 */
 }
 
+/* NAVIGATION COMPONENT */
 .main-nav {
   display: flex;
   justify-content: space-between;
@@ -70,6 +71,7 @@ body {
   width: 200px;
 }
 
+/* HERO in INDEX PAGE */
 .hero {
   background-image: url('assets/bank-tree.jpeg');
   background-position: 0 -50px;
@@ -123,6 +125,7 @@ body {
   }
 }
 
+/* FEATURES in INDEX PAGE AND COMPONENT FEATURE */
 .features {
   display: flex;
   flex-direction: column;
@@ -153,6 +156,7 @@ body {
   margin-bottom: 0.5rem;
 }
 
+/* FORM in SIGN IN PAGE */
 .sign-in-button {
   display: block;
   width: 100%;
@@ -202,6 +206,7 @@ body {
   font-size: 1.2rem;
 }
 
+/* FOOTER COMPONENT */
 .footer {
   display: flex;
   justify-content: center;
@@ -214,6 +219,7 @@ body {
   padding: 0;
 }
 
+/* ACCOUNT COMPONENT in USER PAGE*/
 .account {
   display: flex;
   justify-content: space-between;
@@ -251,6 +257,7 @@ body {
   flex: 1;
 }
 
+/* HEADER FEATURES in USER PAGE */
 .edit-button {
   border-color: #00bc77;
   background-color: #00bc77;
@@ -276,6 +283,7 @@ body {
   color: #fff;
 }
 
+/* MIXED RESPONSIVE DESIGN in USER PAGE*/
 @media (min-width: 720px) {
   .account {
     flex-direction: row;

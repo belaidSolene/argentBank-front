@@ -6,6 +6,7 @@ import FeatureCard from '../../components/FeatureCard'
 
 import styled from 'styled-components'
 import { device } from '../../utils/style/breakpoints'
+import bgHero from '../../assets/bank-tree.jpeg'
 
 export default function Index() {
 	return (
@@ -17,8 +18,8 @@ export default function Index() {
 			{/* Main Part of Index Page */}
 			<main>
 				{/* First part, "plant" */}
-				<div class='hero'>
-					<section class='hero-content'>
+				<Hero>
+					<HeroContent>
 						<h2 class='sr-only'>
 							Promoted Content
 						</h2>
@@ -33,8 +34,8 @@ export default function Index() {
 							Open a savings account with
 							Argent Bank today!
 						</p>
-					</section>
-				</div>
+					</HeroContent>
+				</Hero>
 
 				<Features>
 					<h2 class='sr-only'>Features</h2>
@@ -55,6 +56,25 @@ export default function Index() {
 		</div>
 	)
 }
+
+const Hero = styled.div`
+	background-image: url(${bgHero});
+	background-position: 0 -50px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 300px;
+	position: relative;
+`
+
+const HeroContent = styled.section`
+	position: relative;
+	top: 2rem;
+	width: 200px;
+	background: white;
+	padding: 2rem;
+	text-align: left;
+	margin: 0 auto;
+`
 
 const Features = styled.section`
 	display: flex;

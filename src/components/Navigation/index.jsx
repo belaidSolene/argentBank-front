@@ -18,7 +18,7 @@ export default function Navigation({ children }) {
 					children
 				) : (
 					<StyledNavLink to={'/login'}>
-						<i class='fa fa-user-circle'></i>
+						<i className='fa fa-user-circle'></i>
 						<span>Sign In</span>
 					</StyledNavLink>
 				)}
