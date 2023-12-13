@@ -1,38 +1,30 @@
-import AccountCard from '../../components/AccountCard'
-import Footer from '../../components/Footer'
+import { Link, NavLink } from 'react-router-dom'
+
 import { accountUser } from '../../data/accountUser'
+
+import Footer from '../../components/Footer'
+import Navigation from '../../components/Navigation'
+import AccountCard from '../../components/AccountCard'
+
+import styled from 'styled-components'
+import { StyledNavLink } from '../../components/Navigation'
 
 export default function User() {
 	return (
 		/* Title "Argent Bank - Home Page"*/
 
 		<div>
-			{/* Header */}
-			{/* Main nav */}
-			<nav className='main-nav'>
-				{/* Logo retour page Index */}
-				<a class='main-nav-logo' href='./index.html'>
-					<img
-						class='main-nav-logo-image'
-						src='./img/argentBankLogo.png'
-						alt='Argent Bank Logo'
-					/>
-					<h1 class='sr-only'>Argent Bank</h1>
-				</a>
+			<Navigation>
+				<StyledNavLink to={'/profil'}>
+					<i class='fa fa-user-circle'></i>
+					Tony
+				</StyledNavLink>
 
-				{/* Evolve with pages */}
-				<div>
-					{/* Liens pages User & Index */}
-					<a class='main-nav-item' href='./user.html'>
-						<i class='fa fa-user-circle'></i>
-						Tony
-					</a>
-					<a class='main-nav-item' href='./index.html'>
-						<i class='fa fa-sign-out'></i>
-						Sign Out
-					</a>
-				</div>
-			</nav>
+				<StyledNavLink to={'/'} activeClassName='any'>
+					<i class='fa fa-sign-out'></i>
+					Sign Out
+				</StyledNavLink>
+			</Navigation>
 
 			{/* Main Part of User Page */}
 			<main className='main bg-dark'>

@@ -1,35 +1,12 @@
 import Footer from '../../components/Footer'
+import Navigation from '../../components/Navigation'
 
 export default function SignIn() {
 	return (
 		/* Title "Argent Bank - Home Page"*/
 
 		<div>
-			{/* Header */}
-			{/* Main nav */}
-			<nav class='main-nav'>
-				{/* Logo retour page Index */}
-				<a class='main-nav-logo' href='./index.html'>
-					<img
-						class='main-nav-logo-image'
-						src='./img/argentBankLogo.png'
-						alt='Argent Bank Logo'
-					/>
-					<h1 class='sr-only'>Argent Bank</h1>
-				</a>
-
-				{/* Evolve with pages */}
-				<div>
-					{/* Lien page SignIn */}
-					<a
-						class='main-nav-item'
-						href='./sign-in.html'
-					>
-						<i class='fa fa-user-circle'></i>
-						Sign In
-					</a>
-				</div>
-			</nav>
+			<Navigation />
 
 			{/* Main Part of SignIn Page */}
 			<main class='main bg-dark'>

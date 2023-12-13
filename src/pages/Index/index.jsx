@@ -1,40 +1,18 @@
 import { featuresIndex } from '../../data/featuresIndex'
 
+import Navigation from '../../components/Navigation'
+import Footer from '../../components/Footer'
 import FeatureCard from '../../components/FeatureCard'
+
 import styled from 'styled-components'
 import { device } from '../../utils/style/breakpoints'
-import Footer from '../../components/Footer'
 
 export default function Index() {
 	return (
 		/* Title "Argent Bank - Home Page"*/
 
 		<div>
-			{/* Header */}
-			{/* Main nav */}
-			<nav className='main-nav'>
-				{/* Logo retour page Index */}
-				<a class='main-nav-logo' href='./index.html'>
-					<img
-						className='main-nav-logo-image'
-						src='./img/argentBankLogo.png'
-						alt='Argent Bank Logo'
-					/>
-					<h1 class='sr-only'>Argent Bank</h1>
-				</a>
-
-				{/* Evolve with pages */}
-				<div>
-					{/* Lien page SignIn */}
-					<a
-						class='main-nav-item'
-						href='./sign-in.html'
-					>
-						<i class='fa fa-user-circle'></i>
-						Sign In
-					</a>
-				</div>
-			</nav>
+			<Navigation />
 
 			{/* Main Part of Index Page */}
 			<main>
