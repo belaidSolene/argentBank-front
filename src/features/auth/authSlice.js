@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { userLogin } from './authAction'
-import { apiSlice } from '../api/api'
 
 const initialState = {
-	userInfo: {}, // for user object
+	userProfile: {}, // for user object
 	userToken: null, // for storing the JWT
 	loading: false,
 	success: false, // for monitoring the registration process.
@@ -13,7 +12,18 @@ const initialState = {
 const authSlice = createSlice({
 	name: 'auth',
 	initialState,
-	reducers: {},
+	reducers: {
+		setProfile: (state, action) => {
+			state.userProfile = action.payload
+		},
+		logout: (state) => {
+			state.loading = initialState.loading
+			state.userProfile = initialState.userProfile
+			state.userToken = initialState.userToken
+			state.error = initialState.error
+			state.success = initialState.success
+		},
+	},
 	extraReducers: (builder) => {
 		builder.addCase(userLogin.pending, (state) => {
 			state.loading = true
@@ -31,5 +41,5 @@ const authSlice = createSlice({
 	},
 })
 
-export const { login, logout } = authSlice.actions
+export const { setProfile, logout } = authSlice.actions
 export default authSlice.reducer

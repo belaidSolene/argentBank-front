@@ -5,18 +5,17 @@ import { useNavigate } from 'react-router-dom'
 import { userLogin } from '../auth/authAction'
 
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 
 export default function LoginForm() {
-	const { loading, error, success } = useSelector((state) => state.user)
+	const { loading, error, success } = useSelector((state) => state.auth)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const { register, handleSubmit } = useForm()
 
-	// redirect authenticated user to profile screen
+	// redirect authenticated user to user page
 	useEffect(() => {
 		if (success) {
-			navigate('/profil')
+			navigate('/profile')
 		}
 	}, [navigate, success])
 
@@ -25,49 +24,44 @@ export default function LoginForm() {
 	}
 
 	return (
-		<div>
-			<form onSubmit={handleSubmit(submitForm)}>
-				{/* Username input */}
-				<InputWrapper>
-					<label htmlFor='username'>Username</label>
-					<input
-						type='text'
-						id='username'
-						{...register('email')}
-						required
-					/>
-				</InputWrapper>
+		<form onSubmit={handleSubmit(submitForm)}>
+			{/* Username input */}
+			<InputWrapper>
+				<label htmlFor='username'>Username</label>
+				<input
+					type='text'
+					id='username'
+					{...register('email')}
+					required
+				/>
+			</InputWrapper>
 
-				{/* Password input */}
-				<InputWrapper>
-					<label htmlFor='password'>Password</label>
-					<input
-						type='password'
-						id='password'
-						{...register('password')}
-						required
-					/>
-				</InputWrapper>
+			{/* Password input */}
+			<InputWrapper>
+				<label htmlFor='password'>Password</label>
+				<input
+					type='password'
+					id='password'
+					{...register('password')}
+					required
+				/>
+			</InputWrapper>
 
-				{/* Remerber me input */}
-				<InputRemember>
-					<input
-						type='checkbox'
-						id='remember-me'
-						{...register('rememberMe')}
-					/>
-					<label htmlFor='remember-me'>
-						Remember me
-					</label>
-				</InputRemember>
+			{/* Remerber me input */}
+			<InputRemember>
+				<input
+					type='checkbox'
+					id='remember-me'
+					{...register('rememberMe')}
+				/>
+				<label htmlFor='remember-me'>Remember me</label>
+			</InputRemember>
 
-				{/* Button submit */}
-				<SubmitButton type='submit' disabled={loading}>
-					Sign In
-				</SubmitButton>
-			</form>
-			<Link to={'/profil'}>profil</Link>
-		</div>
+			{/* Button submit */}
+			<SubmitButton type='submit' disabled={loading}>
+				Sign In
+			</SubmitButton>
+		</form>
 	)
 }
 

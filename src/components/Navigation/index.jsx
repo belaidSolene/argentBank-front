@@ -2,9 +2,14 @@ import { Link, NavLink } from 'react-router-dom'
 
 import Logo from '../../assets/argentBankLogo.png'
 
-import styled from 'styled-components'
+import Logout from '../../features/Logout'
 
-export default function Navigation({ children }) {
+import styled from 'styled-components'
+import { useSelector } from 'react-redux'
+
+export default function Navigation({ firstName }) {
+	const { success } = useSelector((state) => state.auth)
+
 	return (
 		<Nav>
 			<LogoLink to={'/'}>
@@ -13,16 +18,21 @@ export default function Navigation({ children }) {
 			</LogoLink>
 
 			{/* Evolves with pages */}
-			<div>
-				{children ? (
-					children
-				) : (
-					<StyledNavLink to={'/login'}>
+			{success ? (
+				<div>
+					<StyledNavLink to={'/profile'}>
 						<i className='fa fa-user-circle'></i>
-						<span>Sign In</span>
+						{firstName}
 					</StyledNavLink>
-				)}
-			</div>
+
+					<Logout />
+				</div>
+			) : (
+				<StyledNavLink to={'/login'}>
+					<i className='fa fa-user-circle'></i>
+					<span>Sign In</span>
+				</StyledNavLink>
+			)}
 		</Nav>
 	)
 }

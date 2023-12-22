@@ -1,17 +1,33 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const apiSlice = createApi({
-	baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001/api/v1' }),
+	baseQuery: fetchBaseQuery({
+		baseUrl: 'http://localhost:3001/api/v1',
+		prepareHeaders: (headers, { getState }) => {
+			const token = getState().auth.userToken
+			if (token) {
+				headers.set('authorization', `Bearer ${token}`)
+			}
+			return headers
+		},
+	}),
 	endpoints: (builder) => ({
-		userLogin: builder.query({
-			query: ({ email, password }) => ({
-				url: 'user/login',
+		userProfile: builder.query({
+			query: () => ({
+				url: 'user/profile',
 				method: 'POST',
-				body: { email, password },
+			}),
+		}),
+
+		updateProfile: builder.mutation({
+			query: ({ firstName, lastName }) => ({
+				url: 'user/profile',
+				method: 'PUT',
+				body: { firstName, lastName },
 			}),
 		}),
 	}),
 })
 
-export const { useUserLoginQuery } = apiSlice
+export const { useUserProfileQuery, useUpdateProfileMutation } = apiSlice
 export default apiSlice

@@ -1,27 +1,36 @@
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { setProfile } from '../../features/auth/authSlice'
+
+import { useUserProfileQuery } from '../../features/api/api'
 import { accountUser } from '../../data/accountUser'
 
 import Footer from '../../components/Footer'
 import Navigation from '../../components/Navigation'
 import AccountCard from '../../components/AccountCard'
 
-import { StyledNavLink } from '../../components/Navigation'
-
 export default function User() {
+	const { success, userProfile } = useSelector((state) => state.auth)
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
+	const { data } = useUserProfileQuery()
+
+	useEffect(() => {
+		if (success && data) {
+			dispatch(setProfile(data.body))
+		} else {
+			navigate('/login')
+		}
+	}, [dispatch, navigate, success, data])
+
+	const { firstName, lastName } = userProfile
+
 	return (
 		/* Title "Argent Bank - Home Page"*/
 
 		<div>
-			<Navigation>
-				<StyledNavLink to={'/profil'}>
-					<i className='fa fa-user-circle'></i>
-					Tony
-				</StyledNavLink>
-
-				<StyledNavLink to={'/'}>
-					<i className='fa fa-sign-out'></i>
-					Sign Out
-				</StyledNavLink>
-			</Navigation>
+			<Navigation firstName={firstName} />
 
 			{/* Main Part of User Page */}
 			<main className='main bg-dark'>
@@ -31,7 +40,7 @@ export default function User() {
 						Welcome back
 						<br />
 						{/* Dynamic naming */}
-						Tony Jarvis!
+						{firstName} {lastName}!
 					</h1>
 
 					{/* What does it do ? */}
