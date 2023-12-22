@@ -1,28 +1,56 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setProfile } from '../../features/auth/authSlice'
 
-import { useUserProfileQuery } from '../../features/api/api'
+import {
+	useUserProfileQuery,
+	useUpdateProfileMutation,
+} from '../../features/api/api'
 import { accountUser } from '../../data/accountUser'
 
-import Footer from '../../components/Footer'
 import Navigation from '../../components/Navigation'
+import EditName from '../../features/EditName'
+import Footer from '../../components/Footer'
 import AccountCard from '../../components/AccountCard'
 
 export default function User() {
 	const { success, userProfile } = useSelector((state) => state.auth)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
-	const { data } = useUserProfileQuery()
+	const { data: userProfileData } = useUserProfileQuery()
+
+	const [isEditing, setIsEditing] = useState(false)
+	const [updateProfile] = useUpdateProfileMutation()
+
+	const toggleEditing = () => {
+		setIsEditing(!isEditing)
+	}
+
+	const saveEditedName = async (editedData) => {
+		try {
+			const { data: updatedProfileData } = await updateProfile({
+				firstName: editedData.firstName,
+				lastName: editedData.lastName,
+			})
+
+			// Dispatch action to update the user profile with the updated data
+			dispatch(setProfile(updatedProfileData.body))
+
+			// Close the editing form
+			setIsEditing(false)
+		} catch (error) {
+			console.error('Error updating profile:', error)
+		}
+	}
 
 	useEffect(() => {
-		if (success && data) {
-			dispatch(setProfile(data.body))
+		if (success && userProfileData) {
+			dispatch(setProfile(userProfileData.body))
 		} else {
 			navigate('/login')
 		}
-	}, [dispatch, navigate, success, data])
+	}, [dispatch, navigate, success, userProfileData])
 
 	const { firstName, lastName } = userProfile
 
@@ -35,19 +63,28 @@ export default function User() {
 			{/* Main Part of User Page */}
 			<main className='main bg-dark'>
 				{/* Header Main Part */}
-				<div className='header'>
-					<h1>
-						Welcome back
-						<br />
-						{/* Dynamic naming */}
-						{firstName} {lastName}!
-					</h1>
-
-					{/* What does it do ? */}
-					<button className='edit-button'>
-						Edit Name
-					</button>
-				</div>
+				{isEditing ? (
+					<EditName
+						firstName={firstName}
+						lastName={lastName}
+						onSave={saveEditedName}
+						onCancel={toggleEditing}
+					/>
+				) : (
+					<div className='header'>
+						<h1>
+							Welcome back
+							<br />
+							{firstName} {lastName}!
+						</h1>
+						<button
+							className='edit-button'
+							onClick={toggleEditing}
+						>
+							Edit Name
+						</button>
+					</div>
+				)}
 
 				{/* Accounts Part */}
 				<h2 className='sr-only'>Accounts</h2>
