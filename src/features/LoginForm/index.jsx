@@ -1,32 +1,39 @@
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { userLogin } from '../../features/auth/authSlice'
+import { useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { userLogin } from '../auth/authAction'
+
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 export default function LoginForm() {
-	const [userName, setUserName] = useState('')
-	const [password, setPassword] = useState('')
+	const { loading, error, success } = useSelector((state) => state.user)
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
+	const { register, handleSubmit } = useForm()
 
-	const submitForm = (e) => {
-		e.preventDefault()
-		console.log(userName, password)
-		dispatch(userLogin({ userName, password }))
+	// redirect authenticated user to profile screen
+	useEffect(() => {
+		if (success) {
+			navigate('/profil')
+		}
+	}, [navigate, success])
+
+	const submitForm = (data) => {
+		dispatch(userLogin(data))
 	}
 
 	return (
 		<div>
-			<form onSubmit={submitForm}>
+			<form onSubmit={handleSubmit(submitForm)}>
 				{/* Username input */}
 				<InputWrapper>
 					<label htmlFor='username'>Username</label>
 					<input
 						type='text'
 						id='username'
-						onChange={(e) =>
-							setUserName(e.target.value)
-						}
+						{...register('email')}
 						required
 					/>
 				</InputWrapper>
@@ -37,23 +44,27 @@ export default function LoginForm() {
 					<input
 						type='password'
 						id='password'
-						onChange={(e) =>
-							setPassword(e.target.value)
-						}
+						{...register('password')}
 						required
 					/>
 				</InputWrapper>
 
 				{/* Remerber me input */}
 				<InputRemember>
-					<input type='checkbox' id='remember-me' />
+					<input
+						type='checkbox'
+						id='remember-me'
+						{...register('rememberMe')}
+					/>
 					<label htmlFor='remember-me'>
 						Remember me
 					</label>
 				</InputRemember>
 
 				{/* Button submit */}
-				<SubmitButton type='submit'>Sign In</SubmitButton>
+				<SubmitButton type='submit' disabled={loading}>
+					Sign In
+				</SubmitButton>
 			</form>
 			<Link to={'/profil'}>profil</Link>
 		</div>
