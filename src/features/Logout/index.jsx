@@ -8,7 +8,7 @@ export default function Logout() {
 	return (
 		<StyledNavLink to={'/'} onClick={() => dispatch(logout())}>
 			<i className='fa fa-sign-out'></i>
-			Sign Out
+			<span>Sign Out</span>
 		</StyledNavLink>
 	)
 }

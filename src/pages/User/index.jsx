@@ -14,6 +14,10 @@ import EditName from '../../features/EditName'
 import Footer from '../../components/Footer'
 import AccountCard from '../../components/AccountCard'
 
+import styled from 'styled-components'
+import { colors } from '../../utils/style/colors'
+import { Container } from '../Index'
+
 export default function User() {
 	const { success, userProfile } = useSelector((state) => state.auth)
 	const dispatch = useDispatch()
@@ -55,14 +59,10 @@ export default function User() {
 	const { firstName, lastName } = userProfile
 
 	return (
-		/* Title "Argent Bank - Home Page"*/
-
-		<div>
+		<Container>
 			<Navigation firstName={firstName} />
 
-			{/* Main Part of User Page */}
-			<main className='main bg-dark'>
-				{/* Header Main Part */}
+			<StyledMain>
 				{isEditing ? (
 					<EditName
 						firstName={firstName}
@@ -71,19 +71,16 @@ export default function User() {
 						onCancel={toggleEditing}
 					/>
 				) : (
-					<div className='header'>
+					<Header>
 						<h1>
 							Welcome back
 							<br />
 							{firstName} {lastName}!
 						</h1>
-						<button
-							className='edit-button'
-							onClick={toggleEditing}
-						>
+						<EditButton onClick={toggleEditing}>
 							Edit Name
-						</button>
-					</div>
+						</EditButton>
+					</Header>
 				)}
 
 				{/* Accounts Part */}
@@ -99,9 +96,26 @@ export default function User() {
 						/>
 					)
 				)}
-			</main>
+			</StyledMain>
 
 			<Footer />
-		</div>
+		</Container>
 	)
 }
+
+const StyledMain = styled.main`
+	background-color: ${colors.bg};
+`
+
+export const Header = styled.div`
+	color: #fff;
+	margin-bottom: 2rem;
+`
+
+const EditButton = styled.button`
+	border-color: #00bc77;
+	background-color: #00bc77;
+	color: #fff;
+	font-weight: bold;
+	padding: 10px;
+`

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { userLogin } from '../auth/authAction'
 
 import styled from 'styled-components'
+import { colors } from '../../utils/style/colors'
 
 export default function LoginForm() {
 	const { loading, error, success } = useSelector((state) => state.auth)
@@ -96,7 +97,7 @@ const SubmitButton = styled.button`
 	font-size: 1.1rem;
 	font-weight: bold;
 	margin-top: 1rem;
-	border-color: #00bc77;
-	background-color: #00bc77;
-	color: #fff;
+	border-color: ${colors.primary};
+	background-color: ${colors.primary};
+	color: ${colors.white};
 `

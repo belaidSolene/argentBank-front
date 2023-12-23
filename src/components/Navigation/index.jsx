@@ -6,6 +6,7 @@ import Logout from '../../features/Logout'
 
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
+import { colors } from '../../utils/style/colors'
 
 export default function Navigation({ firstName }) {
 	const { success } = useSelector((state) => state.auth)
@@ -13,20 +14,19 @@ export default function Navigation({ firstName }) {
 	return (
 		<Nav>
 			<LogoLink to={'/'}>
-				<LogoStyle src={Logo} alt='Argent Bank Logo' />
+				<StyleLogo src={Logo} alt='Argent Bank Logo' />
 				<h1 className='sr-only'>Argent Bank</h1>
 			</LogoLink>
 
-			{/* Evolves with pages */}
 			{success ? (
-				<div>
+				<NavUser>
 					<StyledNavLink to={'/profile'}>
 						<i className='fa fa-user-circle'></i>
-						{firstName}
+						<span>{firstName}</span>
 					</StyledNavLink>
 
 					<Logout />
-				</div>
+				</NavUser>
 			) : (
 				<StyledNavLink to={'/login'}>
 					<i className='fa fa-user-circle'></i>
@@ -48,21 +48,31 @@ const LogoLink = styled(Link)`
 	align-items: center;
 `
 
-const LogoStyle = styled.img`
+const StyleLogo = styled.img`
 	max-width: 100%;
 	width: 200px;
 `
+
+const NavUser = styled.div`
+	display: flex;
+	gap: 0.5rem;
+`
+
 export const StyledNavLink = styled(NavLink)`
 	text-decoration: none;
 	margin-right: 0.5rem;
 	font-weight: bold;
-	color: #2c3e50;
+	color: ${colors.secondary};
 
 	&:hover {
 		text-decoration: underline;
 	}
 
 	&.active {
-		color: #42b983;
+		color: ${colors.activeLink};
+	}
+
+	span {
+		margin-left: 0.3rem;
 	}
 `

@@ -10,8 +10,11 @@ export default function AccountCard({ title, amount, description }) {
 				<Amount>{amount}</Amount>
 				<Description>{description}</Description>
 			</Content>
+
 			<CTA>
-				<Button>View transactions</Button>
+				<TransactionButton>
+					View transactions
+				</TransactionButton>
 			</CTA>
 		</Account>
 	)
@@ -64,7 +67,7 @@ const CTA = styled(Content)`
 	}
 `
 
-const Button = styled.button`
+const TransactionButton = styled.button`
 	display: block;
 	width: 100%;
 	padding: 8px;
