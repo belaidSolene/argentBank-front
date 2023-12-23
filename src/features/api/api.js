@@ -12,7 +12,7 @@ export const apiSlice = createApi({
 		},
 	}),
 	endpoints: (builder) => ({
-		userProfile: builder.query({
+		getProfile: builder.query({
 			query: () => ({
 				url: 'user/profile',
 				method: 'POST',
@@ -29,5 +29,5 @@ export const apiSlice = createApi({
 	}),
 })
 
-export const { useUserProfileQuery, useUpdateProfileMutation } = apiSlice
+export const { useGetProfileQuery, useUpdateProfileMutation } = apiSlice
 export default apiSlice

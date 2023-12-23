@@ -1,12 +1,20 @@
 import { useForm } from 'react-hook-form'
+
 import styled from 'styled-components'
+import { device } from '../../utils/style/breakpoints'
 import { colors } from '../../utils/style/colors'
 import { Header } from '../../pages/User'
 
 export default function EditName({ firstName, lastName, onSave, onCancel }) {
 	const { register, handleSubmit } = useForm()
 
-	const submitForm = (data) => onSave(data)
+	const submitForm = (data) => {
+		const formattedData = {
+			firstName: data.firstName || firstName,
+			lastName: data.lastName || lastName,
+		}
+		onSave(formattedData)
+	}
 
 	return (
 		<Header>
@@ -15,13 +23,11 @@ export default function EditName({ firstName, lastName, onSave, onCancel }) {
 			<form onSubmit={handleSubmit(submitForm)}>
 				<Wrapper>
 					<StyledInput
-						className='edit-firstname'
 						type='text'
 						{...register('firstName')}
 						placeholder={firstName}
 					/>
 					<StyledInput
-						className='edit-lastname'
 						type='text'
 						{...register('lastName')}
 						placeholder={lastName}
@@ -29,13 +35,14 @@ export default function EditName({ firstName, lastName, onSave, onCancel }) {
 				</Wrapper>
 
 				<Wrapper>
-					<Button type='submit' className='button'>
-						Save
-					</Button>
+					<Button type='submit'>Save</Button>
 
 					<Button
-						className='button'
-						onClick={onCancel}
+						type='button'
+						onClick={(event) => {
+							event.preventDefault()
+							onCancel()
+						}}
 					>
 						Cancel
 					</Button>
@@ -47,15 +54,30 @@ export default function EditName({ firstName, lastName, onSave, onCancel }) {
 
 const Wrapper = styled.div`
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
-	margin-bottom: 1rem;
-	gap: 1.5rem;
+	align-items: center;
+	margin-bottom: 2rem;
+	gap: 1.2rem;
+
+	@media (${device.laptop}) {
+		flex-direction: row;
+		align-items: normal;
+		margin-bottom: 1rem;
+		gap: 1.5rem;
+	}
 `
 
 const StyledInput = styled.input`
 	padding: 8px;
 	font-size: 1.2rem;
 	border: 3px solid ${colors.grey};
+	width: 85%;
+
+	@media (${device.laptop}) {
+		width: initial;
+	}
+
 	::placeholder {
 		color: ${colors.grey};
 	}
@@ -68,6 +90,11 @@ const Button = styled.button`
 	padding: 10px;
 	font-size: 1.1rem;
 	font-weight: bold;
-	margin-top: 1rem;
-	width: 9rem;
+	width: 90%;
+
+	@media (${device.laptop}) {
+		flex-direction: row;
+		align-items: normal;
+		width: 9rem;
+	}
 `

@@ -26,7 +26,7 @@ const Account = styled.section`
 	align-items: center;
 	border: 1px solid black;
 	background-color: #fff;
-	width: 80%;
+	width: 90%;
 	margin: 0 auto;
 	flex-direction: column;
 	padding: 1.5rem;
@@ -35,6 +35,7 @@ const Account = styled.section`
 	margin-bottom: 2rem;
 
 	@media (${device.laptop}) {
+		width: 80%;
 		flex-direction: row;
 	}
 `

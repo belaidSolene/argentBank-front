@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setProfile } from '../../features/auth/authSlice'
 
 import {
-	useUserProfileQuery,
+	useGetProfileQuery,
 	useUpdateProfileMutation,
 } from '../../features/api/api'
 import { accountUser } from '../../data/accountUser'
@@ -22,7 +22,7 @@ export default function User() {
 	const { success, userProfile } = useSelector((state) => state.auth)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
-	const { data: userProfileData } = useUserProfileQuery()
+	const { data: userProfileData } = useGetProfileQuery()
 
 	const [isEditing, setIsEditing] = useState(false)
 	const [updateProfile] = useUpdateProfileMutation()
@@ -60,7 +60,7 @@ export default function User() {
 
 	return (
 		<Container>
-			<Navigation firstName={firstName} />
+			<Navigation />
 
 			<StyledMain>
 				{isEditing ? (

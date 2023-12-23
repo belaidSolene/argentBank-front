@@ -8,8 +8,8 @@ import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { colors } from '../../utils/style/colors'
 
-export default function Navigation({ firstName }) {
-	const { success } = useSelector((state) => state.auth)
+export default function Navigation() {
+	const { success, userProfile } = useSelector((state) => state.auth)
 
 	return (
 		<Nav>
@@ -22,7 +22,7 @@ export default function Navigation({ firstName }) {
 				<NavUser>
 					<StyledNavLink to={'/profile'}>
 						<i className='fa fa-user-circle'></i>
-						<span>{firstName}</span>
+						<span>{userProfile.firstName}</span>
 					</StyledNavLink>
 
 					<Logout />
