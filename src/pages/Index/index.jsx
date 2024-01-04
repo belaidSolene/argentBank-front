@@ -1,22 +1,33 @@
+/**
+ * The 'Index' component represents the main landing page of the application.
+ * It includes a navigation bar, a hero section with promotional content, a section showcasing features using FeatureCard components,
+ * and a footer.
+ *
+ * @component
+ */
+
 import { featuresIndex } from '../../data/featuresIndex'
 
 import Navigation from '../../components/Navigation'
 import Footer from '../../components/Footer'
 import FeatureCard from '../../components/FeatureCard'
 
+// Importing necessary dependencies for styling
 import styled from 'styled-components'
 import { device } from '../../utils/style/breakpoints'
 import bgHero from '../../assets/bank-tree.jpeg'
 
 export default function Index() {
+	// JSX structure defining the Footer component layout
 	return (
 		<Container>
 			<Navigation />
 
 			<main>
+				{/* Hero Section */}
 				<Hero>
 					<HeroContent>
-						<h2 class='sr-only'>
+						<h2 className='sr-only'>
 							Promoted Content
 						</h2>
 
@@ -37,15 +48,17 @@ export default function Index() {
 					</HeroContent>
 				</Hero>
 
+				{/* Features Section */}
 				<Features>
-					<h2 class='sr-only'>Features</h2>
+					<h2 className='sr-only'>Features</h2>
 
 					{featuresIndex.map(
-						({ img, title, content }) => (
+						({ img, title, content }, index) => (
 							<FeatureCard
 								img={img}
 								title={title}
 								content={content}
+								key={index}
 							/>
 						)
 					)}
@@ -57,6 +70,7 @@ export default function Index() {
 	)
 }
 
+// Styled components
 export const Container = styled.div`
 	margin: 0;
 	display: flex;

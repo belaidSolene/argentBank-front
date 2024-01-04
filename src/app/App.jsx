@@ -1,9 +1,10 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-/* import App from './app/App'; */
+// Importing custom page components
 import Index from '../pages/Index'
 import SignIn from '../pages/SignIn'
 import User from '../pages/User'
+import Error from '../pages/Error'
 
 // Creating a browser router with defined routes and associated components
 const router = createBrowserRouter([
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
 	{
 		path: '/profile',
 		element: <User />,
+	},
+	{
+		path: '*',
+		element: <Error />,
 	},
 ])
 

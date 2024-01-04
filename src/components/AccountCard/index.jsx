@@ -1,16 +1,33 @@
+/**
+ * The AccountCard component represents a styled card displaying user account information.
+ * It features a title, amount, and description along with a button to view transactions.
+ * The styling is achieved using styled-components, and responsive design is implemented using media queries.
+ *
+ * @component
+ * @param {Object} props - The properties of the AccountCard component.
+ * @param {string} props.title - The title of the user account.
+ * @param {string} props.amount - The amount associated with the user account.
+ * @param {string} props.description - A description of the user account.
+ * @returns {JSX.Element} AccountCard component.
+ */
+
+// Importing necessary dependencies for styling
 import styled from 'styled-components'
 import { device } from '../../utils/style/breakpoints'
 import { colors } from '../../utils/style/colors'
 
 export default function AccountCard({ title, amount, description }) {
+	// JSX structure defining the AccountCard component layout
 	return (
 		<Account>
+			{/* Content section */}
 			<Content>
 				<Title>{title}</Title>
 				<Amount>{amount}</Amount>
 				<Description>{description}</Description>
 			</Content>
 
+			{/* Call to Action (CTA) section */}
 			<CTA>
 				<TransactionButton>
 					View transactions
@@ -20,6 +37,7 @@ export default function AccountCard({ title, amount, description }) {
 	)
 }
 
+// Styled components
 const Account = styled.section`
 	display: flex;
 	justify-content: space-between;

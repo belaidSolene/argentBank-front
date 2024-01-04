@@ -1,14 +1,32 @@
+/**
+ * The EditName component represents a form for editing the user's first and last name.
+ * It utilizes react-hook-form for form handling, styled-components for styling, and includes Save and Cancel buttons.
+ * The form allows users to update their first and last names and triggers the onSave or onCancel callbacks accordingly.
+ *
+ * @component
+ * @param {string} firstName - The current first name of the user.
+ * @param {string} lastName - The current last name of the user.
+ * @param {Function} onSave - Callback function triggered when the user clicks the "Save" button.
+ * @param {Function} onCancel - Callback function triggered when the user clicks the "Cancel" button.
+ * @returns {JSX.Element} EditName component.
+ */
+
 import { useForm } from 'react-hook-form'
 
+// Importing necessary dependencies for styling
 import styled from 'styled-components'
 import { device } from '../../utils/style/breakpoints'
 import { colors } from '../../utils/style/colors'
 import { Header } from '../../pages/User'
 
 export default function EditName({ firstName, lastName, onSave, onCancel }) {
+	// React-hook-form configuration
 	const { register, handleSubmit } = useForm()
 
+	// Form submission function
 	const submitForm = (data) => {
+		// Format the data by checking if the input fields are empty;
+		//if empty, keep the current names, and then trigger the onSave callback.
 		const formattedData = {
 			firstName: data.firstName || firstName,
 			lastName: data.lastName || lastName,
@@ -16,12 +34,15 @@ export default function EditName({ firstName, lastName, onSave, onCancel }) {
 		onSave(formattedData)
 	}
 
+	// JSX structure defining the Footer component layout
 	return (
 		<Header>
 			<h1>Welcome back</h1>
 
+			{/* EditName form */}
 			<form onSubmit={handleSubmit(submitForm)}>
 				<Wrapper>
+					{/* Input fields for first and last names */}
 					<StyledInput
 						type='text'
 						{...register('firstName')}
@@ -35,6 +56,7 @@ export default function EditName({ firstName, lastName, onSave, onCancel }) {
 				</Wrapper>
 
 				<Wrapper>
+					{/* Buttons for Save and Cancel actions */}
 					<Button type='submit'>Save</Button>
 
 					<Button
@@ -52,6 +74,7 @@ export default function EditName({ firstName, lastName, onSave, onCancel }) {
 	)
 }
 
+// Styled components
 const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
