@@ -53,7 +53,7 @@ export default function EditName({ firstName, lastName, onSave, onCancel }) {
 							type='text'
 							{...register('firstName', {
 								pattern: {
-									value: /^[\p{L}]+$/u,
+									value: /^[a-zA-ZÀ-ÿ-]+$/,
 									message: 'Invalid format',
 								},
 							})}
@@ -74,7 +74,7 @@ export default function EditName({ firstName, lastName, onSave, onCancel }) {
 							type='text'
 							{...register('lastName', {
 								pattern: {
-									value: /^[\p{L}]+$/u,
+									value: /^[a-zA-ZÀ-ÿ-]+$/,
 									message: 'Invalid format',
 								},
 							})}
