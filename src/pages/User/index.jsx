@@ -51,6 +51,8 @@ export default function User() {
 				lastName: editedData.lastName,
 			})
 
+			console.log(updatedProfileData.body)
+
 			// Dispatch action to update the user profile with the updated data
 			dispatch(setProfile(updatedProfileData.body))
 

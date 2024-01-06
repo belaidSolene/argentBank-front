@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { colors } from '../../utils/style/colors'
 import { Container } from '../Index'
+import Footer from '../../components/Footer'
 
 export default function Error() {
 	// JSX structure defining the Footer component layout
@@ -27,15 +28,16 @@ export default function Error() {
 
 				<StyleLink to='/'>Back to Homepage</StyleLink>
 			</WrapperError>
+			<Footer />
 		</Container>
 	)
 }
 
 // Styled components
 const WrapperError = styled.div`
-	height: 700px;
 	text-align: center;
 	margin-top: 5rem;
+	flex: 1;
 `
 
 const Title = styled.h1`
