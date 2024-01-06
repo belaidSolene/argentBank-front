@@ -18,10 +18,15 @@ import styled from 'styled-components'
 import { device } from '../../utils/style/breakpoints'
 import { colors } from '../../utils/style/colors'
 import { Header } from '../../pages/User'
+import { ErrorMessage } from '../LoginForm'
 
 export default function EditName({ firstName, lastName, onSave, onCancel }) {
 	// React-hook-form configuration
-	const { register, handleSubmit } = useForm()
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm()
 
 	// Form submission function
 	const submitForm = (data) => {
@@ -43,16 +48,48 @@ export default function EditName({ firstName, lastName, onSave, onCancel }) {
 			<form onSubmit={handleSubmit(submitForm)}>
 				<Wrapper>
 					{/* Input fields for first and last names */}
-					<StyledInput
-						type='text'
-						{...register('firstName')}
-						placeholder={firstName}
-					/>
-					<StyledInput
-						type='text'
-						{...register('lastName')}
-						placeholder={lastName}
-					/>
+					<WrapperInput>
+						<StyledInput
+							type='text'
+							{...register('firstName', {
+								pattern: {
+									value: /^[\p{L}]+$/u,
+									message: 'Invalid format',
+								},
+							})}
+							placeholder={firstName}
+						/>
+						{errors.firstName && (
+							<ErrorMessage>
+								{
+									errors.firstName
+										.message
+								}
+							</ErrorMessage>
+						)}
+					</WrapperInput>
+
+					<WrapperInput>
+						<StyledInput
+							type='text'
+							{...register('lastName', {
+								pattern: {
+									value: /^[\p{L}]+$/u,
+									message: 'Invalid format',
+								},
+							})}
+							placeholder={lastName}
+						/>
+
+						{errors.lastName && (
+							<ErrorMessage>
+								{
+									errors.lastName
+										.message
+								}
+							</ErrorMessage>
+						)}
+					</WrapperInput>
 				</Wrapper>
 
 				<Wrapper>
@@ -79,16 +116,23 @@ const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	margin-bottom: 2rem;
 	gap: 1.2rem;
 
 	@media (${device.laptop}) {
 		flex-direction: row;
-		align-items: normal;
 		margin-bottom: 1rem;
 		gap: 1.5rem;
 	}
+`
+
+const WrapperInput = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 0.5rem;
 `
 
 const StyledInput = styled.input`

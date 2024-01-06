@@ -153,7 +153,7 @@ const ErrorAPIMessage = styled.p`
 	background-color: rgba(${colors.bgError}, 0.3);
 `
 
-const ErrorMessage = styled.p`
+export const ErrorMessage = styled.p`
 	color: ${colors.error};
 	font-size: 0.8rem;
 	margin: 0.2rem 0 0 0;
